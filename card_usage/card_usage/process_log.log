@@ -1,0 +1,125 @@
+2024-12-25 11:42:08,330 - ERROR - An error occurred: bad file type "*.csv", should be "typeName {extension ?extensions ...?} ?{macType ?macTypes ...?}?"
+2024-12-25 11:42:43,014 - ERROR - An error occurred: bad file type "*.csv", should be "typeName {extension ?extensions ...?} ?{macType ?macTypes ...?}?"
+2024-12-25 11:44:17,302 - ERROR - An error occurred: bad file type "*.csv", should be "typeName {extension ?extensions ...?} ?{macType ?macTypes ...?}?"
+2024-12-25 11:46:23,456 - ERROR - An error occurred: 'utf-8' codec can't decode byte 0xd0 in position 0: invalid continuation byte
+2024-12-25 11:49:44,892 - ERROR - An error occurred: 'utf-8' codec can't decode byte 0xd0 in position 0: invalid continuation byte
+2024-12-25 11:50:02,876 - ERROR - Failed to load Excel file: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2024-12-25 11:50:02,877 - ERROR - An error occurred: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2024-12-25 11:50:17,128 - ERROR - An error occurred: Error tokenizing data. C error: Expected 1 fields in line 60, saw 2
+
+2024-12-25 11:59:35,813 - ERROR - An error occurred: No file selected.
+2024-12-25 11:59:44,033 - ERROR - An error occurred: 'utf-8' codec can't decode byte 0xb1 in position 0: invalid start byte
+2024-12-25 12:00:21,368 - ERROR - Failed to get category for store 까페흙과나무: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,372 - ERROR - Failed to get category for store 꿀꿀이해장국: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,372 - ERROR - Failed to get category for store 백운주유소: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,372 - ERROR - Failed to get category for store 세븐일레븐인덕원2점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,373 - ERROR - Failed to get category for store 이자카야미소: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,373 - ERROR - Failed to get category for store 이마트평촌점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,374 - ERROR - Failed to get category for store 투썸플레이스인덕원역점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,375 - ERROR - Failed to get category for store 태뭉인덕원점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,375 - ERROR - Failed to get category for store GS25관양인덕원점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,377 - ERROR - Failed to get category for store 하타네인덕원점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,378 - ERROR - Failed to get category for store 신세계프라퍼티코엑스몰: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,381 - ERROR - Failed to get category for store 자양한방병원: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,381 - ERROR - Failed to get category for store 프렌즈코인노래연습장인덕원점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,382 - ERROR - Failed to get category for store 코레일유통수원역: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,383 - ERROR - Failed to get category for store AKPLAZA수원점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,385 - ERROR - Failed to get category for store 스타벅스코리아: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,387 - ERROR - Failed to get category for store 파파도나스: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,387 - ERROR - Failed to get category for store 주식회사우아한형제들 - (주)우아한형제들: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,388 - ERROR - Failed to get category for store 모찌이야기: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,389 - ERROR - Failed to get category for store 식음연구소센트럴시티점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,391 - ERROR - Failed to get category for store 코리아세븐동대문경찰서점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,391 - ERROR - Failed to get category for store 갱스덕: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,393 - ERROR - Failed to get category for store 엠아이보컬스튜디오: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,395 - ERROR - Failed to get category for store 코레일유통범계역점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,395 - ERROR - Failed to get category for store 잇츠비: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,395 - ERROR - Failed to get category for store 이동의즐거움_택시_5: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,401 - ERROR - Failed to get category for store 정은숙초당순두부초당면옥: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,402 - ERROR - Failed to get category for store 홈플러스강릉점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,403 - ERROR - Failed to get category for store 코레일유통청량리역: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,404 - ERROR - Failed to get category for store 홍대개미청량리역사점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,405 - ERROR - Failed to get category for store 코레일유통자판기: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,406 - ERROR - Failed to get category for store KCP_결제 - (주)자비스앤빌런즈: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,407 - ERROR - Failed to get category for store 안동집: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,409 - ERROR - Failed to get category for store 인터넷상거래 - 주식회사디지털존: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,409 - ERROR - Failed to get category for store 햇살마트: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,410 - ERROR - Failed to get category for store 벌크커피첨단점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,410 - ERROR - Failed to get category for store 코레일유통광명역: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,415 - ERROR - Failed to get category for store 코스트코코리아: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,416 - ERROR - Failed to get category for store GS25종로관철점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,417 - ERROR - Failed to get category for store KCP_결제 - 주식회사야놀자: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,419 - ERROR - Failed to get category for store 프롬하츠커피종로점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,420 - ERROR - Failed to get category for store 플러스82헤어평촌: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,420 - ERROR - Failed to get category for store 씨유CU송파올림픽점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,421 - ERROR - Failed to get category for store GS25송파오륜점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,423 - ERROR - Failed to get category for store 국내 일시불 소계 62건: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,423 - ERROR - Failed to get category for store 할부 소계 1건: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,424 - ERROR - Failed to get category for store 총 합계 소계 63건: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:00:21,438 - ERROR - Error processing DataFrame: No module named 'openpyxl'
+2024-12-25 12:00:21,440 - ERROR - An error occurred: No module named 'openpyxl'
+2024-12-25 12:01:20,846 - ERROR - An error occurred: 'utf-8' codec can't decode byte 0xb1 in position 0: invalid start byte
+2024-12-25 12:01:50,709 - ERROR - Failed to get category for store 백운주유소: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,709 - ERROR - Failed to get category for store 세븐일레븐인덕원2점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,709 - ERROR - Failed to get category for store 까페흙과나무: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,710 - ERROR - Failed to get category for store 이자카야미소: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,710 - ERROR - Failed to get category for store 꿀꿀이해장국: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,713 - ERROR - Failed to get category for store 태뭉인덕원점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,714 - ERROR - Failed to get category for store 이마트평촌점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,716 - ERROR - Failed to get category for store 투썸플레이스인덕원역점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,717 - ERROR - Failed to get category for store GS25관양인덕원점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,718 - ERROR - Failed to get category for store 하타네인덕원점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,719 - ERROR - Failed to get category for store 신세계프라퍼티코엑스몰: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,720 - ERROR - Failed to get category for store 자양한방병원: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,721 - ERROR - Failed to get category for store 프렌즈코인노래연습장인덕원점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,722 - ERROR - Failed to get category for store 코레일유통수원역: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,724 - ERROR - Failed to get category for store AKPLAZA수원점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,725 - ERROR - Failed to get category for store 스타벅스코리아: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,726 - ERROR - Failed to get category for store 주식회사우아한형제들 - (주)우아한형제들: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,727 - ERROR - Failed to get category for store 파파도나스: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,728 - ERROR - Failed to get category for store 모찌이야기: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,729 - ERROR - Failed to get category for store 식음연구소센트럴시티점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,731 - ERROR - Failed to get category for store 갱스덕: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,732 - ERROR - Failed to get category for store 코리아세븐동대문경찰서점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,734 - ERROR - Failed to get category for store 엠아이보컬스튜디오: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,735 - ERROR - Failed to get category for store 코레일유통범계역점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,737 - ERROR - Failed to get category for store 잇츠비: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,738 - ERROR - Failed to get category for store 이동의즐거움_택시_5: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,739 - ERROR - Failed to get category for store 정은숙초당순두부초당면옥: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,741 - ERROR - Failed to get category for store 홈플러스강릉점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,741 - ERROR - Failed to get category for store 코레일유통청량리역: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,743 - ERROR - Failed to get category for store 홍대개미청량리역사점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,744 - ERROR - Failed to get category for store 코레일유통자판기: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,744 - ERROR - Failed to get category for store KCP_결제 - (주)자비스앤빌런즈: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,746 - ERROR - Failed to get category for store 안동집: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,748 - ERROR - Failed to get category for store 인터넷상거래 - 주식회사디지털존: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,749 - ERROR - Failed to get category for store 벌크커피첨단점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,750 - ERROR - Failed to get category for store 햇살마트: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,750 - ERROR - Failed to get category for store 코레일유통광명역: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,753 - ERROR - Failed to get category for store 코스트코코리아: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,754 - ERROR - Failed to get category for store GS25종로관철점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,756 - ERROR - Failed to get category for store KCP_결제 - 주식회사야놀자: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,757 - ERROR - Failed to get category for store 프롬하츠커피종로점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,758 - ERROR - Failed to get category for store 플러스82헤어평촌: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,759 - ERROR - Failed to get category for store 씨유CU송파올림픽점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,760 - ERROR - Failed to get category for store GS25송파오륜점: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,763 - ERROR - Failed to get category for store 국내 일시불 소계 62건: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,765 - ERROR - Failed to get category for store 할부 소계 1건: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,765 - ERROR - Failed to get category for store 총 합계 소계 63건: Could not find a suitable TLS CA certificate bundle, invalid path: C:\Program Files\PostgreSQL\16\ssl\certs\ca-bundle.crt
+2024-12-25 12:01:50,776 - ERROR - Error processing DataFrame: No module named 'openpyxl'
+2024-12-25 12:01:50,776 - ERROR - An error occurred: No module named 'openpyxl'
+2024-12-25 16:36:48,313 - ERROR - An error occurred: No file selected.
+2025-01-01 13:38:41,311 - ERROR - An error occurred: No file selected.
+2025-01-01 13:49:45,424 - ERROR - Failed to load Excel file: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2025-01-01 13:49:45,424 - ERROR - An error occurred: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2025-01-01 13:50:22,690 - ERROR - Failed to load Excel file: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2025-01-01 13:50:22,690 - ERROR - An error occurred: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2025-01-01 13:50:57,436 - ERROR - Failed to load Excel file: File is not a zip file
+2025-01-01 13:50:57,436 - ERROR - An error occurred: File is not a zip file
+2025-01-01 13:51:28,079 - ERROR - Failed to load Excel file: File is not a zip file
+2025-01-01 13:51:28,080 - ERROR - An error occurred: File is not a zip file
+2025-01-01 13:54:42,987 - ERROR - Failed to load Excel file: Worksheet index 0 is invalid, 0 worksheets found
+2025-01-01 13:54:42,987 - ERROR - An error occurred: Worksheet index 0 is invalid, 0 worksheets found
+2025-01-01 13:57:28,826 - ERROR - Failed to load Excel file: Worksheet index 0 is invalid, 0 worksheets found
+2025-01-01 13:57:28,826 - ERROR - An error occurred: Worksheet index 0 is invalid, 0 worksheets found
+2025-01-01 14:12:51,562 - ERROR - An error occurred: No file selected.
