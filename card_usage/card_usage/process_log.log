@@ -123,3 +123,150 @@
 2025-01-01 13:57:28,826 - ERROR - Failed to load Excel file: Worksheet index 0 is invalid, 0 worksheets found
 2025-01-01 13:57:28,826 - ERROR - An error occurred: Worksheet index 0 is invalid, 0 worksheets found
 2025-01-01 14:12:51,562 - ERROR - An error occurred: No file selected.
+2025-01-05 11:04:21,009 - INFO - Starting program execution.
+2025-01-05 11:04:24,391 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:04:24,396 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:10:52,064 - INFO - Starting program execution.
+2025-01-05 11:10:54,658 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:10:54,663 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:12:24,425 - INFO - Starting program execution.
+2025-01-05 11:12:26,500 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:12:26,505 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:12:39,868 - INFO - Starting program execution.
+2025-01-05 11:12:41,704 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:12:41,710 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:12:50,941 - INFO - Starting program execution.
+2025-01-05 11:12:52,690 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:12:52,695 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:13:39,725 - INFO - Starting program execution.
+2025-01-05 11:13:41,251 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:13:41,256 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:14:54,117 - INFO - Starting program execution.
+2025-01-05 11:14:56,298 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:14:56,303 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:18:48,348 - INFO - Starting program execution.
+2025-01-05 11:18:50,704 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:18:50,709 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:18:51,542 - INFO - Submit clicked. Current card_type: 
+2025-01-05 11:18:53,467 - INFO - Submit clicked. Current card_type: 
+2025-01-05 11:18:53,517 - INFO - Submit clicked. Current card_type: 
+2025-01-05 11:19:01,335 - INFO - Submit clicked. Current card_type: 
+2025-01-05 11:19:43,376 - INFO - Starting program execution.
+2025-01-05 11:19:45,158 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:19:45,163 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:24:46,780 - INFO - Starting program execution.
+2025-01-05 11:24:48,470 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:24:48,475 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:26:25,370 - INFO - Starting program execution.
+2025-01-05 11:26:26,766 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:26:26,771 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:27:04,645 - INFO - Starting program execution.
+2025-01-05 11:27:06,220 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:27:06,225 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:27:33,944 - INFO - Starting program execution.
+2025-01-05 11:27:35,329 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:27:35,334 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:28:59,630 - INFO - Starting program execution.
+2025-01-05 11:29:01,814 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:29:01,819 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:29:25,795 - INFO - Starting program execution.
+2025-01-05 11:29:27,251 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:29:27,257 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:30:42,993 - INFO - Starting program execution.
+2025-01-05 11:30:44,610 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:30:44,615 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:30:45,332 - INFO - Submit clicked. Current card_type.get(): 
+2025-01-05 11:31:53,414 - INFO - Starting program execution.
+2025-01-05 11:31:54,782 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:31:54,787 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:31:55,689 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:31:57,206 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:31:57,262 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:31:57,347 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:31:57,530 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:31:57,680 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:31:57,830 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:31:57,964 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:31:58,114 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:31:58,261 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:31:58,431 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:31:58,581 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:31:58,747 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:31:58,797 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:32:00,663 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:32:00,714 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:33:37,504 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 11:33:46,420 - INFO - Starting program execution.
+2025-01-05 11:33:48,454 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:33:48,459 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:33:49,295 - WARNING - No card type selected.
+2025-01-05 11:48:30,645 - INFO - Starting program execution.
+2025-01-05 11:48:33,704 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:48:33,718 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:50:27,224 - INFO - Starting program execution.
+2025-01-05 11:50:29,486 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:50:29,491 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:51:08,464 - INFO - Starting program execution.
+2025-01-05 11:51:10,141 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:51:10,146 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:51:41,993 - INFO - Starting program execution.
+2025-01-05 11:51:43,596 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:51:43,601 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:55:58,065 - INFO - Starting program execution.
+2025-01-05 11:55:59,501 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 11:55:59,506 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 11:56:00,245 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 13:51:15,652 - INFO - Starting program execution.
+2025-01-05 13:51:17,392 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 13:51:17,397 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 13:51:18,144 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 13:51:18,186 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 13:51:20,169 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 13:51:20,836 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 13:51:21,069 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 13:51:21,219 - INFO - Submit clicked. Selected card_type: None
+2025-01-05 13:59:46,950 - INFO - Starting program execution.
+2025-01-05 13:59:48,439 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 13:59:48,445 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 13:59:48,505 - INFO - Initial card_type value: 
+2025-01-05 13:59:49,348 - INFO - Submit clicked. Selected card_type: 
+2025-01-05 14:38:47,394 - INFO - Starting program execution.
+2025-01-05 14:38:49,079 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 14:38:49,086 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 14:38:50,063 - INFO - Submit clicked. Selected card_type: 
+2025-01-05 14:39:09,538 - INFO - Starting program execution.
+2025-01-05 14:39:11,408 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 14:39:11,416 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 14:39:16,174 - INFO - Submit clicked. Selected card_type: 
+2025-01-05 14:41:52,460 - INFO - Starting program execution.
+2025-01-05 14:41:54,720 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 14:41:54,726 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 14:41:57,187 - INFO - Submit clicked. Selected card_type: 
+2025-01-05 15:13:53,750 - INFO - Starting program execution.
+2025-01-05 15:13:56,673 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 15:13:56,679 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 15:13:56,749 - INFO - Initial card_type value: 
+2025-01-05 15:13:57,794 - INFO - Submit clicked. Selected card_type: 
+2025-01-05 15:32:46,659 - INFO - Starting program execution.
+2025-01-05 15:32:50,627 - INFO - Selected file: C:/Users/hs/Desktop/hyundaicard_20240526.csv
+2025-01-05 15:32:50,645 - INFO - File loaded successfully with UTF-8 encoding.
+2025-01-05 15:32:50,708 - INFO - Initial card_type value: 
+2025-01-05 15:32:52,612 - INFO - Radio button selected. Current value: 
+2025-01-05 15:32:53,038 - INFO - Submit clicked. Selected card_type: 
+2025-01-05 15:32:56,524 - INFO - Radio button selected. Current value: 
+2025-01-05 16:18:42,574 - INFO - Starting program execution.
+2025-01-05 16:18:44,064 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 16:18:44,071 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 16:18:46,392 - INFO - Submit clicked. Selected card_type: 
+2025-01-05 16:18:53,340 - INFO - Starting program execution.
+2025-01-05 16:18:55,282 - INFO - Selected file: C:/Users/hs/Desktop/report__kb.csv
+2025-01-05 16:18:55,288 - INFO - File loaded successfully with CP949 encoding.
+2025-01-05 16:18:58,041 - INFO - Submit clicked. Selected card_type: 
+2025-01-05 16:18:58,815 - INFO - Submit clicked. Selected card_type: 
+2025-01-05 16:18:59,215 - INFO - Submit clicked. Selected card_type: 
+2025-01-09 22:49:40,559 - INFO - Starting program execution.
+2025-01-09 22:49:43,207 - INFO - Selected file: C:/Users/hs/Desktop/kb12.csv
+2025-01-09 22:49:43,220 - INFO - File loaded successfully with CP949 encoding.
+2025-01-09 22:49:45,270 - INFO - Submit clicked. Selected card_type: 
+2025-01-09 22:49:46,785 - INFO - Submit clicked. Selected card_type: 
+2025-01-09 22:49:48,525 - INFO - Submit clicked. Selected card_type: 
