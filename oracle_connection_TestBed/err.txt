@@ -1,0 +1,163 @@
+다른 pc 기준오류 
+
+
+
+
+Traceback (most recent call last):
+  File "spxVoltMap.py", line 27, in <module>
+  File "<frozen importlib._bootstrap>", line 1007, in find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "PyInstaller\loader\pyimod02_importers.py", line 419, in exec_module
+  File "scipy\interpolate__init.py", line 167, in <module>
+  File "<frozen importlib._bootstrap>", line 1007, in find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "PyInstaller\loader\pyimod02_importers.py", line 419, in exec_module
+  File "scipy\interpolate_interpolate.py", line 10, in <module>
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "PyInstaller\loader\pyimod02_importers.py", line 419, in exec_module
+  File "scipy\special__init.py", line 781, in <module>
+  File "<frozen importlib._bootstrap>", line 1007, in find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "PyInstaller\loader\pyimod02_importers.py", line 419, in exec_module
+  File "scipy\special_support_alternative_backends.py", line 6, in <module>
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "PyInstaller\loader\pyimod02_importers.py", line 419, in exec_module
+  File "scipy_lib_array_api.py", line 17, in <module>
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "PyInstaller\loader\pyimod02_importers.py", line 419, in exec_module
+  File "scipy_lib\array_api_compat\numpy__init.py", line 1, in <module>
+  File "<frozen importlib._bootstrap>", line 1007, in find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "PyInstaller\loader\pyimod02_importers.py", line 419, in exec_module
+  File "numpy\f2py__init.py", line 19, in <module>
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "PyInstaller\loader\pyimod02_importers.py", line 419, in exec_module
+  File "numpy\f2py\f2py2e.py", line 23, in <module>
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "PyInstaller\loader\pyimod02_importers.py", line 419, in exec_module
+  File "numpy\f2py\crackfortran.py", line 159, in <module>
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "PyInstaller\loader\pyimod02_importers.py", line 419, in exec_module
+  File "numpy\f2py\auxfuncs.py", line 19, in <module>
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "PyInstaller\loader\pyimod02_importers.py", line 419, in exec_module
+  File "numpy\f2py\cfuncs.py", line 19, in <module>
+AttributeError: 'NoneType' object has no attribute 'write'
+Voltmap 오류 팝업 내용
+
+
+
+---------
+
+Traceback (most recent call last):
+  File "Lib\site-packages\PyInstaller\hooks\rthooks\pyi_rth_pkgutil.py", line 63, in <module>
+  File "Lib\site-packages\PyInstaller\hooks\rthooks\pyi_rth_pkgutil.py", line 17, in _pyi_rthook
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "pkgutil.py", line 6, in <module>
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "importlib\util.py", line 2, in <module>
+  File "<frozen importlib._bootstrap>", line 1058, in _handle_fromlist
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "importlib\abc.py", line 17, in <module>
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "C:\Users\user1\AppData\Local\Temp\_MEI140162\typing\__init__.py", line 158, in <module>
+    from numpy._typing import (
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 972, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "numpy\__init__.py", line 211, in <module>
+  File "<frozen importlib._bootstrap>", line 1058, in _handle_fromlist
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "numpy\lib\__init__.py", line 23, in <module>
+  File "<frozen importlib._bootstrap>", line 1058, in _handle_fromlist
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "numpy\lib\_index_tricks_impl.py", line 12, in <module>
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "numpy\matrixlib\__init__.py", line 4, in <module>
+  File "<frozen importlib._bootstrap>", line 1058, in _handle_fromlist
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "numpy\matrixlib\defmatrix.py", line 12, in <module>
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "numpy\linalg\__init__.py", line 88, in <module>
+  File "<frozen importlib._bootstrap>", line 1058, in _handle_fromlist
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "numpy\linalg\_linalg.py", line 22, in <module>
+ImportError: cannot import name 'NamedTuple' from partially initialized module 'typing' (most likely due to a circular import) (C:\Users\user1\AppData\Local\Temp\_MEI140162\typing\__init__.py)
+
+
+
+
+
+spxhist.
+zlib data compression library
+
+
+
