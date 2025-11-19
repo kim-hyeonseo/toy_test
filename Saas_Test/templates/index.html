@@ -1,0 +1,18 @@
+{% extends "_base.html" %}
+{% block content %}
+<h2>입력 → 처리 → 결과 다운로드</h2>
+
+<h2>Q1 ~ Q10 선택 설문</h2>
+<form action="{{ url_for('process') }}" method="post">
+  {% for q in questions %}
+  <div style="margin-bottom: 20px;">
+    <label><b>{{ q.text }}</b></label><br>
+    <label><input type="radio" name="{{ q.id }}" value="1"> a. 선택지 A (1점)</label><br>
+    <label><input type="radio" name="{{ q.id }}" value="2"> b. 선택지 B (2점)</label><br>
+    <label><input type="radio" name="{{ q.id }}" value="3"> c. 선택지 C (3점)</label><br>
+    <label><input type="radio" name="{{ q.id }}" value="4"> d. 선택지 D (4점)</label>
+  </div>
+  {% endfor %}
+  <button type="submit">처리하기</button>
+</form>
+{% endblock %}
