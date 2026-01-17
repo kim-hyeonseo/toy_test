@@ -33,6 +33,7 @@ Thumbs.db
 *.lib
 *.obj
 *.out
+*.pch
 
 # 2. Visual Studio 프로젝트 설정 및 임시 파일
 .vs/                   # 이 폴더가 용량 괴물입니다. (꼭 추가!)
