@@ -25,3 +25,26 @@ htmlcov/
 .idea/
 .DS_Store
 Thumbs.db
+
+# cpp
+# 1. 컴파일 결과물 (실행 파일 및 라이브러리)
+*.exe
+*.dll
+*.lib
+*.obj
+*.out
+
+# 2. Visual Studio 프로젝트 설정 및 임시 파일
+.vs/                   # 이 폴더가 용량 괴물입니다. (꼭 추가!)
+Debug/                 # 빌드 결과물 폴더
+Release/               # 빌드 결과물 폴더
+x64/                   # 64비트 빌드 결과물
+x86/                   # 32비트 빌드 결과물
+
+# 3. IntelliSense 및 기타 데이터베이스
+*.pdb                  # 디버깅 정보 파일
+*.idb
+*.ilk
+*.sdf
+*.ipch
+*.log
