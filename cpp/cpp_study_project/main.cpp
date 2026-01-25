@@ -143,8 +143,91 @@ namespace {
         std::cout << '\n';
         }
 
+
+ void walk_the_map() {
+     std::map<int, std::string> mymap;
+     mymap.insert(std::make_pair(4, "apple"));
+     mymap.insert(std::make_pair(2, "orange"));
+     mymap.insert(std::make_pair(1, "banana"));
+     mymap.insert(std::make_pair(3, "grapes"));
+     mymap.insert(std::make_pair(6, "mango"));
+     mymap.insert(std::make_pair(5, "peach"));
+
+     auto it{ mymap.cbegin() }; // declare a const iterator and assign to start of vector
+     while (it != mymap.cend()) // while it hasn't reach the end
+     {
+         std::cout << it->first << '=' << it->second << ' '; // print the value of the element it points to
+         ++it; // and iterate to the next element
+     }
+
+     std::cout << '\n';
+
+
   }
 
+ void list_initialization() {
+     std::list<int> li(6);
+     // Fill li with numbers starting at 0.
+     std::iota(li.begin(), li.end(), 0);
+
+     // if want to fill only 0, use fill, not iota
+
+     std::cout << *std::min_element(li.begin(), li.end()) << ' '
+         << *std::max_element(li.begin(), li.end()) << '\n';
+
+}
+
+ void list_find_insert() {
+     std::list<int> li(6);
+     std::iota(li.begin(), li.end(), 0);
+
+     int target = 3;
+     // Find the value 3 in the list
+     auto it{ std::find(li.begin(), li.end(), 3) };
+
+     if (it == li.end())
+     {
+         std::cout << target << " was not found" << std::endl;
+         //std::cout << std::format("{} was not found\n", target);
+     }
+
+
+     // Insert 8 right before 3.
+     li.insert(it, 8);
+
+     for (int i : li) // for loop with iterators
+         std::cout << i << ' ';
+
+     std::cout << '\n';
+
+ }
+
+ void vect_sort() {
+     std::vector<int> vect{ 7, -3, 6, 2, -5, 0, 4 };
+
+     // sort the vector
+     std::sort(vect.begin(), vect.end());
+
+     for (int i : vect)
+     {
+         std::cout << i << ' ';
+     }
+
+     std::cout << '\n';
+
+     // reverse the vector
+     std::reverse(vect.begin(), vect.end());
+
+     for (int i : vect)
+     {
+         std::cout << i << ' ';
+     }
+
+     std::cout << '\n';
+ }
+
+
+}
 
 int main() {
 //    IO_function();
@@ -153,6 +236,10 @@ int main() {
 //    compiler_check();
 //    walk_the_vect();
 //    walk_the_list();
-    walk_the_set();
-	return 0;
+//    walk_the_set();
+//    walk_the_map();
+
+//    list_initialization();
+    list_find_insert();
+    return 0;
 }   
