@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-# =========================================================
 # base imports
-# =========================================================
 import numpy as np
 import pandas as pd
 import requests
@@ -22,25 +20,87 @@ from cryptography.fernet import Fernet
 import keyring
 
 import os, sys, configparser, flask
-FERNET_KEY = b'FxitD2c1tOYnwtzOFC203_JVZzMMQvOaEaLfhH-1078='
+
+import os
+from flask import request
+from dash import Dash, html, Input, Output, clientside_callback
+
+# def generate_new_key():
+#     key = Fernet.generate_key()
+#     print(f"[신규 키 생성 완료]: {key.decode()}")
+#     print(" 이 키를 복사해서 프로그램의 'FERNET_KEY' 변수에 붙여넣으세요.\n")
+#     return key
+# 
+# def encrypt_text(plain_text, key):
+#     """문자열을 암호화합니다."""
+#     cipher = Fernet(key)
+#     encrypted_text = cipher.encrypt(plain_text.encode())
+#     return encrypted_text.decode()
+# 
+# def decrypt_text(encrypted_text, key):
+#     """암호화된 문자열을 복호화합니다."""
+#     cipher = Fernet(key)
+#     decrypted_text = cipher.decrypt(encrypted_text.encode())
+#     return decrypted_text.decode()
+# 
+# 
+# key = generate_new_key()
+# enc_id = encrypt_text('SE_USER', key)
+# enc_pw = encrypt_text('RJfoth12#', key)
+
+FERNET_KEY = b'3vqHCJxl_vDg-QA2L2ZilVUnObnsw__JvCE7ZWIKK3E='
 cipher = Fernet(FERNET_KEY)
 
 
-# 공용 공간 경로 설정 (예: 서버 내 다른 드라이브나 폴더)
-COMMON_PATH = r"./" # 실제 GIF가 있는 경로로 수정하세요
 
-# ===============================
-# Constants
-# ===============================
-X_MIN, X_MAX = 125.5, 129.8
-Y_MIN, Y_MAX = 34.5, 38.8
 
-# ===============================
-# Grid Resolution (Kriging)
-# ===============================
-GRID_NX = 140   # longitude resolution
-GRID_NY = 160   # latitude resolution
 
+
+class GlobalVars:
+    # 1. 콤보박스 및 주요 플래그 기본값
+    nominal_flag = "ALL"  # NominalVoltage 기본값
+    rep_flag = "최대"      # RepresentativeVoltage 기본값
+    unit_flag = "PU"       # Unit 기본값
+    current_source = "SE"
+        
+    # 2. DB 및 연결 정보
+    host = None
+    base_url = None
+    name = None
+    user = None
+    password = None
+    port = None
+    test_mode = None
+    source = 'SE' # or MEA
+        
+    # 3. 리소스 및 기타 설정
+    name_ref = None
+    voltage_cfg = {}
+    kriging_cfg = {}
+        
+    # 4. 경로 설정 (전역 유지)
+    base_path = os.getcwd().replace("\\", "/")
+    base_path = os.path.join(base_path, 'HistViewer/spxVoltMap/_internal/').replace("\\", "/")
+    sysconf_path = os.path.join(base_path, '../project/EMS/conf/sysconf.ini').replace("\\", "/")
+
+
+    # Constants
+    LAND_XMIN, LAND_XMAX = 125.5, 129.8
+    LAND_YMIN, LAND_YMAX = 34.2, 38.8
+
+
+    JEJU_XMIN, JEJU_XMAX = 126, 127
+    JEJU_YMIN, JEJU_YMAX = 33.2, 33.6
+
+
+    # Grid Resolution (Kriging)
+    GRID_RESOL = 100   
+
+    df_raw = None
+
+
+# 전역 인스턴스 생성
+Vars = GlobalVars()
 
 
 # 전역 공유 저장소 (스레드 신호 및 데이터 전달용)
@@ -51,64 +111,32 @@ THREAD_STATE = {
     "status": "idle"  # 'idle', 'running', 'done'
 }
 
-
-
-
-# UI 파일: ui_file_path = os.path.join(internal_path, 'spxVoltMap.ui')
-# GeoJSON: geojson_path = os.path.join(internal_path, 'land.geojson')
-# CSV: csv_path = os.path.join(internal_path, 'land_coastline.csv')
-# GIF: gif_path = os.path.join(internal_path, 'load_line.gif')
-
-
-
-
-
-
-# =========================================================
-# 환경 설정 (여기만 수정)
-# =========================================================
-
-HOST = "YOUR_HOST"
-SERVICE = "YOUR_SERVICE"
-USER = "YOUR_USER"
-PASSWORD = "YOUR_PASSWORD"
-PORT = 1521
-SOURCE = "SE"   # or "MEA"
-
-
-
-
+# exe 가 바로 웹 열게 하는 부분
 def open_browser():
     import webbrowser
     webbrowser.open("http://127.0.0.1:8050")
 
-
-
-def load_config(base_path):
+def load_config():
     config = configparser.ConfigParser()
-
-    if os.path.exists(os.path.join(base_path, '../../conf/spxVoltMap_config.ini')):
-        path = os.path.join(base_path, '../../conf/spxVoltMap_config.ini')
+    if os.path.exists(os.path.join(Vars.base_path, '../../conf/spxVoltMap_config.ini')):
+        path = os.path.join(Vars.base_path, '../../conf/spxVoltMap_config.ini')
     else:
-        path = os.path.join(base_path, 'spxVoltMap_config.ini')
+        path = os.path.join(Vars.base_path, 'spxVoltMap_config.ini')
 
     print(f"[CONFIG] load : {path}")
     config.read(path)
 
-    # ---------------------------
-    # select host  (--NHOST / --OHOST)
-    # ---------------------------
     if len(sys.argv) > 1:
         argv = sys.argv[1]
     else:
-        print("[CONFIG] host arg not found → NHOST")
-        argv = '--NHOST'
+        argv = '--OHOST'
+        print(f"[CONFIG] host arg not found → {argv[2:]}")
 
     if argv == '--NHOST':
-        host = config['DB']['host_naju']
+        Vars.host = config['DB']['host_naju']
         base_url = config['DB']['naju_base']
     elif argv == '--OHOST':
-        host = config['DB']['host_osong']
+        Vars.host = config['DB']['host_osong']
         base_url = config['DB']['osong_base']
     else:
         raise ValueError(f"Unknown argv : {argv}")
@@ -117,19 +145,18 @@ def load_config(base_path):
     # DB 계정 복호화
     # ---------------------------
     cipher = Fernet(FERNET_KEY)
+    Vars.base_url=base_url.strip("'")
 
-    user = cipher.decrypt(config['DB']['user'].encode()).decode()
-    password = cipher.decrypt(config['DB']['password'].encode()).decode()
+    Vars.user = cipher.decrypt(config['DB']['user'].encode()).decode()
+    Vars.password = cipher.decrypt(config['DB']['password'].encode()).decode()
 
-    service = config['DB']['name']
-    port = int(config['DB']['port'])
-    test_mode = config['DB'].get('test_mode', 'N')
+    Vars.name = config['DB']['name']
+    Vars.port = config['DB']['port']
+    Vars.test_mode = config['DB'].get('test_mode', 'N')
 
-    # ---------------------------
     # voltage boundary
-    # ---------------------------
     vb = config['voltage_boundary']
-    voltage_cfg = {
+    Vars.voltage_cfg = {
         "graph_ov_color": vb['graph_ov_color'],
         "graph_max_color": vb['graph_max_color'],
         "graph_max_value": float(vb['graph_max_value']),
@@ -149,11 +176,9 @@ def load_config(base_path):
         "point_size": float(vb['point_size']),
     }
 
-    # ---------------------------
     # kriging parameter
-    # ---------------------------
     pd_cfg = config['parameter_detail']
-    kriging_cfg = {
+    Vars.kriging_cfg = {
         "model": pd_cfg['model'], 
         "slope": float(pd_cfg['slope']),
         "nugget": float(pd_cfg['nugget']),
@@ -162,31 +187,13 @@ def load_config(base_path):
         "range": float(pd_cfg['range']),
         "sill": float(pd_cfg['sill']),
     }
-
-    return {
-        "host": host,
-        "base_url": base_url,
-        "service": service,
-        "user": user,
-        "password": password,
-        "port": port,
-        "test_mode": test_mode,
-        "voltage": voltage_cfg,
-        "kriging": kriging_cfg,
-    }
+    print("[CONFIG] App config loaded successfully.")
 
 # =========================================================
 # Flask-Oracle API (without Qt)
 # =========================================================
-FLASK_BASE_URL = ""
 
-
-def set_base_url(base_url: str):
-    global FLASK_BASE_URL
-    FLASK_BASE_URL = base_url.rstrip("/") + "/"
-
-
-def get_all_data_from_oracle(host, service, user, password, port, source="SE"):
+def get_all_data_from_oracle(source="SE"):
     if source == "SE":
         query = """select * from STNVOLTMAP where STNLATITUDE != 0 and STNLONGITUDE != 0 and STNNOMINALVOLT != 0 and STNMAXVOLT != 0 and STNMINVOLT != 0 and STNAVGVOLT != 0 order by CRTTIME desc """
 
@@ -194,85 +201,174 @@ def get_all_data_from_oracle(host, service, user, password, port, source="SE"):
         query = """select * from STNVOLTMAP where STNLATITUDE != 0 and STNLONGITUDE != 0 and STNNOMINALVOLT != 0 and STNMAXVOLT_MEA != 0 and STNMINVOLT_MEA != 0 and STNAVGVOLT_MEA != 0 order by CRTTIME desc"""
 
     payload = {
-        "params": {
-                        "host": host, "port": port, "service_name": service, "user": user, "password": password, "dsn": f"{host}:{port}/{service}",
-                    },
+        "params": {"host": Vars.host, "port": Vars.port, "service_name": Vars.name, "user": Vars.user, "password": Vars.password, "dsn": f"{Vars.host}:{Vars.port}/{Vars.name}"},
         "query": query,
     }
 
+
+    try:    
+        plus_url = 'receive_data_elx'
+        dsn = f'{Vars.base_url}'
+
+        resp = requests.post(dsn + plus_url, json=payload)
+        print('flag2')
+        df = pd.DataFrame(resp.json())
+        print('flag3')
+        if len(df)>0 : df["CRTTIME"] = df['CRTTIME'].apply(lambda x: datetime.strptime(x.replace(' GMT', ''), "%a, %d %b %Y %H:%M:%S") if isinstance(x, str) else None)
+        else : df=[]
+        print('flag4')
+    except :
+        df=[] 
+        print('flag5')
+    if df==[]:
+        # DB 실패 또는 데이터가 없을 경우 CSV 로드 (Fallback)
+        csv_path = os.path.join(Vars.base_path, "voltmap_local.csv")
+        print(f"[DATA] DB failed or empty. Trying CSV: {csv_path}")
+        
+        if os.path.exists(csv_path):
+            try:
+                df = pd.read_csv(csv_path)
+                # CSV 로드 시 시간 컬럼 처리 (필요시)
+                if "CRTTIME" in df.columns:
+                    df["CRTTIME"] = pd.to_datetime(df["CRTTIME"])
+                print("[DATA] CSV loaded successfully.")
+            except Exception as e:
+                print(f"[DATA ERROR] CSV read failed: {e}")
+                return None
+        else:
+            print(f"[DATA ERROR] CSV file not found at: {csv_path}")
+            return 
+
+    Vars.df_raw = df
+
+
+
+def get_latest_time_from_db():
+    query = """select * from STNVOLTMAP where STNLATITUDE !=0 and STNLONGITUDE !=0 and STNMAXVOLT !=0 and STNMINVOLT !=0 and STNAVGVOLT !=0 and STNNOMINALVOLT !=0 order by STNIDX desc fetch first 1 rows only"""
+    payload = {
+        "params": {"host": Vars.host, "port": Vars.port, "service_name": Vars.name, "user": Vars.user, "password": Vars.password, "dsn": f"{Vars.host}:{Vars.port}/{Vars.name}"},
+        "query": query,
+    }
     try:
-        resp = requests.post(
-            FLASK_BASE_URL + "receive_data_elx",
-            json=payload,
-            timeout=10,
-        )
+        resp = requests.post(Vars.base_url + "receive_data_elx", json=payload, timeout=5)
+        print('request complete _single data')
         df = pd.DataFrame(resp.json())
 
-        if not df.empty and "CRTTIME" in df.columns:
-            df["CRTTIME"] = df["CRTTIME"].apply(
-                lambda x: datetime.strptime(
-                    x.replace(" GMT", ""), "%a, %d %b %Y %H:%M:%S"
-                )
-                if isinstance(x, str)
-                else None
-            )
+        tmp = df["CRTTIME"].iloc[0].replace(" GMT","")
+        tmp = datetime.strptime(tmp, "%a, %d %b %Y %H:%M:%S")
 
-        return df, resp.status_code
+        return tmp, resp.status_code
 
-    except Exception as e:
-        print("[DB ERROR]", e)
-        return None, 500
-
-
-def get_latest_time_from_db(host, service, user, password, port):
-    # 가장 최근의 CRTTIME 1건만 가져오는 쿼리
-    query = "SELECT MAX(CRTTIME) as LATEST FROM STNVOLTMAP"
-    payload = {
-        "params": {"host": host, "port": port, "service_name": service, "user": user, "password": password, "dsn": f"{host}:{port}/{service}"},
-        "query": query,
-    }
-    try:
-        resp = requests.post(FLASK_BASE_URL + "receive_data_elx", json=payload, timeout=5)
-        data = resp.json()
-        if data and len(data) > 0:
-            # Flask API가 주는 시간 형식을 맞춰서 리턴 (문자열 혹은 datetime)
-            return str(data[0]['LATEST'])
     except Exception as e:
         # 접속 거부(10061) 등 발생 시 그냥 None 리턴하여 에러 로그 폭발 방지
         return None
 
-    return None
 
 
 
 # =========================================================
 # Kriging + Plotly Figure 생성
 # =========================================================
-def add_geojson_boundary(fig, geojson_path, line_color="lightgray"):
-    gdf = gpd.read_file(geojson_path)
 
-    gdf = gdf[gdf.geometry.notnull()]
-    gdf = gdf[gdf.geometry.is_empty == False]
-    gdf = gdf[gdf.is_valid]
+#old 
+#def add_geojson_boundary(fig, geojson_path, line_color="lightgray"):
+#    gdf = gpd.read_file(geojson_path)
+#
+#    gdf = gdf[gdf.geometry.notnull()]
+#    gdf = gdf[gdf.geometry.is_empty == False]
+#    gdf = gdf[gdf.is_valid]
+#
+#    for geom in gdf.geometry:
+#        if geom.geom_type == "Polygon":
+#            x, y = geom.exterior.coords.xy
+#            fig.add_trace(go.Scatter(x=list(x), y=list(y), mode="lines", line=dict(color=line_color, width=1), hoverinfo="skip", showlegend=False))
+#
+#        elif geom.geom_type == "MultiPolygon":
+#            for poly in geom.geoms:
+#                x, y = poly.exterior.coords.xy
+#                fig.add_trace(go.Scatter(x=list(x), y=list(y), mode="lines", line=dict(color=line_color, width=1), hoverinfo="skip", showlegend=False,))
+#
+
+def add_geojson_boundary(fig, geojson_path, line_color="white"):
+    gdf = gpd.read_file(geojson_path)
+    gdf = gdf[gdf.geometry.notnull() & ~gdf.geometry.is_empty & gdf.is_valid]
+
+    # 모든 좌표를 담을 리스트
+    all_x = []
+    all_y = []
 
     for geom in gdf.geometry:
-        if geom.geom_type == "Polygon":
-            x, y = geom.exterior.coords.xy
-            fig.add_trace(go.Scatter(x=list(x), y=list(y), mode="lines", line=dict(color=line_color, width=1), hoverinfo="skip", showlegend=False))
+        # Polygon이든 MultiPolygon이든 반복문으로 처리
+        polys = [geom] if geom.geom_type == "Polygon" else geom.geoms
+        for poly in polys:
+            x, y = poly.exterior.coords.xy
+            all_x.extend(list(x))
+            all_y.extend(list(y))
+            # 중요: 도형 하나 끝날 때마다 None을 넣어줘야 선이 겹치지 않고 끊깁니다.
+            all_x.append(None)
+            all_y.append(None)
 
-        elif geom.geom_type == "MultiPolygon":
-            for poly in geom.geoms:
-                x, y = poly.exterior.coords.xy
-                fig.add_trace(go.Scatter(x=list(x), y=list(y), mode="lines", line=dict(color=line_color, width=1), hoverinfo="skip", showlegend=False,))
+    # 단 한 번의 add_trace로 모든 경계선을 다 그립니다.
+    fig.add_trace(go.Scatter(
+        x=all_x, y=all_y, 
+        mode="lines", 
+        line=dict(color=line_color, width=1), 
+        hoverinfo="skip", 
+        showlegend=False
+    ))
+
+def build_voltmap_figure():
+    if Vars.df_raw is None or Vars.df_raw.empty:
+        fig = go.Figure()
+        fig2 = go.Figure()
+        fig.update_layout(template="plotly_dark", title="No Data Available")
+        fig2.update_layout(template="plotly_dark", title="No Data Available")
+        return fig, fig2
+
+    # Vars에서 직접 파라미터 추출
+    k_cfg = Vars.kriging_cfg
+    v_cfg = Vars.voltage_cfg
+    df = Vars.df_raw.copy()
+
+    # 콤보박스 값(최대/최소/평균)에 따른 컬럼 결정 (사용자 exe 로직 스타일)
+    if Vars.rep_flag == '최대':
+        rep_col = 'STNMAXVOLT' if Vars.current_source == 'SE' else 'STNMAXVOLT_MEA'
+    elif Vars.rep_flag == '최소':
+        rep_col = 'STNMINVOLT' if Vars.current_source == 'SE' else 'STNMINVOLT_MEA'
+    elif Vars.rep_flag == '평균':
+        rep_col = 'STNAVGVOLT' if Vars.current_source == 'SE' else 'STNAVGVOLT_MEA'
+    else:
+        # 이리로 들어오면 안 됨 (디버깅용)
+        print(f"Unknown RepFlag: {Vars.rep_flag}")
+        return go.Figure()
+
+    # 0값 제거 
+    df = df[df[rep_col] != 0].copy()
+
+    # Nominal Voltage 필터링 (765+345 케이스 포함)
+    if Vars.nominal_flag == '765kV+345kV':
+        df = df[df['STNNOMINALVOLT'].isin([765, 345])]
+    elif Vars.nominal_flag in ['765kV', '345kV', '154kV']:
+        # '765kV' -> 765
+        v_int = int(Vars.nominal_flag.replace('kV', ''))
+        df = df[df['STNNOMINALVOLT'] == v_int]
+    # 'ALL' 이면 필터링 없이 통과
+
+    # 4. 단위 변환 (kV 요청 시)
+    if Vars.unit_flag == 'kV':
+        df[rep_col] = df[rep_col] * df['STNNOMINALVOLT']
+
+    # --- 이후 데이터 분리 및 Kriging (전달받은 rep_col 사용) ---
+    devider = 34.32
+    df_mainland = df[df["STNLATITUDE"] >= devider].copy()
+    df_jeju = df[df["STNLATITUDE"] < devider].copy()
+
+    v_min, v_norm, v_max = v_cfg["graph_min_value"], v_cfg["graph_normal_value"], v_cfg["graph_max_value"]
+    norm_pos = (v_norm - v_min) / (v_max - v_min) if (v_max - v_min) != 0 else 0.5
+    my_colorscale = [[0.0, v_cfg["graph_min_color"]], [norm_pos, v_cfg["graph_normal_color"]],[1.0, v_cfg["graph_max_color"]]]
 
 
-
-def build_voltmap_figure(df_mainland, df_jeju, config, value_col="STNAVGVOLT"):
-    # config에서 Kriging 파라미터 추출
-    k_cfg = config['kriging']
-    v_cfg = config['voltage']
-    
-    # 모델별 파라미터 설정 (Qt 코드 로직 반영)
+    # 모델별 파라미터 설정
     variogram_params = None
     if k_cfg['model'] == 'linear':
         variogram_params = [k_cfg['slope'], k_cfg['nugget']]
@@ -281,135 +377,169 @@ def build_voltmap_figure(df_mainland, df_jeju, config, value_col="STNAVGVOLT"):
     elif k_cfg['model'] == 'power':
         variogram_params = [k_cfg['scale'], k_cfg['exponent'], k_cfg['nugget']]
 
-    fig = go.Figure()
-    # Load boundary
-    add_geojson_boundary(fig, "land.geojson", line_color="#555")
-    add_geojson_boundary(fig, "jeju.geojson", line_color="#555")
+    fig_land = go.Figure()
+    fig_jeju = go.Figure()
+    # 1. 배경 경계선 로드 
+    add_geojson_boundary(fig_land, os.path.join(Vars.base_path, "shp.geojson"), line_color="#555")
+    add_geojson_boundary(fig_jeju, os.path.join(Vars.base_path, "jeju.geojson"), line_color="#555")
 
-    # main land Kriging 
+    # 2. 본토(Mainland) Kriging
     lons = df_mainland["STNLONGITUDE"].values
     lats = df_mainland["STNLATITUDE"].values
-    values = df_mainland[value_col].values
+    values = df_mainland[rep_col].values
 
+    grid_lon = np.linspace(Vars.LAND_XMIN, Vars.LAND_XMAX, Vars.GRID_RESOL)
+    grid_lat = np.linspace(Vars.LAND_YMIN, Vars.LAND_YMAX, Vars.GRID_RESOL)
 
-    grid_lon = np.linspace(X_MIN, X_MAX, GRID_NX)
-    grid_lat = np.linspace(Y_MIN, Y_MAX, GRID_NY)
-
-
-    OK = OrdinaryKriging(lons, lats, values, variogram_model=k_cfg['model'], variogram_parameters=variogram_params, verbose=False, enable_plotting=False,)
-
+    OK = OrdinaryKriging(lons, lats, values, variogram_model=k_cfg['model'], variogram_parameters=variogram_params, verbose=False)
     grid_z, _ = OK.execute("grid", grid_lon, grid_lat)
     gx, gy = np.meshgrid(grid_lon, grid_lat)
 
-    # boundary (mask용)
-    land_outline = os.path.join(internal_path, 'optimized.geojson')
+    # 본토 마스킹 (optimized.geojson 사용)
+    land_outline = os.path.join(Vars.base_path, 'optimized.geojson')
     gdf_land = gpd.read_file(land_outline)
-    gdf_land = gdf_land[gdf_land.geometry.notnull()]
-    gdf_land = gdf_land[gdf_land.geometry.is_empty == False]
-    gdf_land = gdf_land[gdf_land.is_valid]
     boundary_land = unary_union(list(gdf_land.geometry))
-
     mask = vectorized.contains(boundary_land, gx, gy)
     grid_z[~mask] = np.nan
+    tooltips = f'''
+        <b>전압 정보</b><br>
+        경도: %{{x:.2f}}<br>
+        위도: %{{y:.2f}}<br>
+        값: %{{z:.3f}} {Vars.unit_flag}<br>
+        <extra></extra>
+    '''
 
-    ## color bar
-    #fig.add_trace(go.Contour(x=grid_lon, y=grid_lat, z=grid_z, colorscale="RdBu", contours=dict(showlines=False), opacity=0.65, colorbar=dict(title="Voltage (PU)", thickness=20, len=0.75, y=1.05, orientation="h")))
-    z=0
+    # 본토 Contour 추가
+    fig_land.add_trace(go.Contour(x=grid_lon, y=grid_lat, z=grid_z, colorscale=my_colorscale, opacity=0.65, contours=dict(showlines=False), showscale=False,
+        hovertemplate=tooltips
 
-    # Jeju Kriging (without colorbar)
-    lons_j = df_jeju["STNLONGITUDE"].values
-    lats_j = df_jeju["STNLATITUDE"].values
-    values_j = df_jeju[value_col].values
-
-    grid_lon_j = np.linspace(X_MIN, X_MAX, GRID_NX)
-    grid_lat_j = np.linspace(Y_MIN, Y_MAX, GRID_NY)
-
-    OK_j = OrdinaryKriging(lons_j, lats_j, values_j, variogram_model=k_cfg['model'], variogram_parameters=variogram_params, verbose=False, enable_plotting=False,)
-    z=0
-    grid_z_j, _ = OK_j.execute("grid", grid_lon_j, grid_lat_j)
-    gx_j, gy_j = np.meshgrid(grid_lon_j, grid_lat_j)
-
-    jeju_outline = gpd.read_file(land_outline)
-    gdf_jeju = gdf_jeju[gdf_jeju.geometry.notnull()]
-    gdf_jeju = gdf_jeju[gdf_jeju.geometry.is_empty == False]
-    gdf_jeju = gdf_jeju[gdf_jeju.is_valid]
-    boundary_jeju = unary_union(list(gdf_jeju.geometry))
-
-    mask_j = vectorized.contains(boundary_jeju, gx_j, gy_j)
-    grid_z_j[~mask_j] = np.nan
-
-    fig.add_trace(go.Contour(x=grid_lon_j, y=grid_lat_j, z=grid_z_j, colorscale="RdBu", contours=dict(showlines=False), opacity=0.65, showscale=False))
-
-
-    # S/S
-    fig.add_trace(go.Scatter(x=df_mainland["STNLONGITUDE"], y=df_mainland["STNLATITUDE"], mode="markers", marker=dict(size=4, color="black"), hoverinfo="skip", showlegend=False,))
-    fig.add_trace(go.Scatter(x=df_jeju["STNLONGITUDE"], y=df_jeju["STNLATITUDE"], mode="markers", marker=dict(size=4, color="black"), hoverinfo="skip", showlegend=False, ))
-
-    z=0
-
-
-    fig.update_layout(
-        autosize=True,
-
-        # 본토 axis (전체)
-        xaxis=dict(
-            domain=[0.0, 1.0],
-            range=[X_MIN, X_MAX],
-            visible=False,
-        ),
-        yaxis=dict(
-            domain=[0.0, 1.0],
-            range=[Y_MIN, Y_MAX],
-            visible=False,
-        ),
-
-        # 제주 inset (좌하단)
-        xaxis2=dict(
-            domain=[0.05, 0.28],
-            range=[X_MIN, X_MAX],
-            visible=False,
-            anchor="y2",
-        ),
-        yaxis2=dict(
-            domain=[0.05, 0.28],
-            range=[Y_MIN, Y_MAX],
-            visible=False,
-            anchor="x2",
-        ),
-
-        margin=dict(l=0, r=0, t=0, b=0),
-        paper_bgcolor="#1e242b",
-        plot_bgcolor="#1e242b",
-    )
-
-    
-    return fig
-
-
-def build_colorbar_figure(vmin=1.028, vmax=1.042):
-    fig = go.Figure()
-
-    fig.add_trace(go.Heatmap(
-        z=[[vmin, vmax]],
-        colorscale="RdBu",
-        showscale=True,
-        colorbar=dict(
-            title="Voltage (PU)",
-            orientation="h",
-            len=1.0,
-            thickness=18,
-            tickformat=".3f",
-        ),
     ))
 
+    # -----------------------------------------------------
+    # 3. 제주(Jeju) Kriging (xaxis2, yaxis2 사용)
+    # -----------------------------------------------------
+    lons_j = df_jeju["STNLONGITUDE"].values
+    lats_j = df_jeju["STNLATITUDE"].values
+    values_j = df_jeju[rep_col].values
+
+
+    grid_lon_j = np.linspace(Vars.JEJU_XMIN, Vars.JEJU_XMAX, Vars.GRID_RESOL)
+    grid_lat_j = np.linspace(Vars.JEJU_YMIN, Vars.JEJU_YMAX, Vars.GRID_RESOL)
+    
+    OK_j = OrdinaryKriging(lons_j, lats_j, values_j, variogram_model=k_cfg['model'], variogram_parameters=variogram_params, verbose=False)
+    grid_z_j, _ = OK_j.execute("grid", grid_lon_j, grid_lat_j) 
+    gx, gy = np.meshgrid(grid_lon_j, grid_lat_j)
+
+    # 제주 마스킹
+    jeju_geo_path = os.path.join(Vars.base_path, 'jeju.geojson')
+    gdf_jeju_poly = gpd.read_file(jeju_geo_path)
+    boundary_jeju = unary_union(list(gdf_jeju_poly.geometry))
+    mask_j = vectorized.contains(boundary_jeju, gx, gy)
+    grid_z_j[~mask_j] = np.nan
+
+
+    # 제주 Contour 
+    fig_jeju.add_trace(go.Contour(x=grid_lon_j, y=grid_lat_j, z=grid_z_j, colorscale=my_colorscale, opacity=0.65, contours=dict(showlines=False), showscale=False))
+
+    # 4. 변전소 마커 추가
+    fig_land.add_trace(go.Scatter(x=df_mainland["STNLONGITUDE"], y=df_mainland["STNLATITUDE"], mode="markers", marker=dict(size=3, color="black"), hoverinfo="skip", showlegend=False))
+    
+    # 제주 변전소 마커 
+    fig_jeju.add_trace(go.Scatter(x=df_jeju["STNLONGITUDE"], y=df_jeju["STNLATITUDE"], mode="markers", marker=dict(size=3, color="black"), hoverinfo="skip", showlegend=False))
+
+    # 공통 레이아웃 설정 함수 (중복 제거용)
+    def apply_common_layout(fig, x_range, y_range):
+        fig.update_layout(
+            autosize=True,
+            margin=dict(l=0, r=0, t=0, b=0),
+            paper_bgcolor="#15191c",
+            plot_bgcolor="#15191c",
+            xaxis=dict(
+                range=x_range,
+                visible=False,
+                # [추가] 오토 스케일과 유사한 느낌을 주도록 여백 강제 제거
+                constrain="domain", 
+                autorange=False      # Plotly가 스스로 계산하지 못하게 함
+            ),
+            yaxis=dict(
+                range=y_range,
+                visible=False,
+                scaleanchor="x",     # 가로세로 비율 유지 (지도가 찌그러지지 않게 함)
+                scaleratio=1,
+                autorange=False
+            ),
+            showlegend=False
+        )
+
+
+    # 본토 레이아웃 적용 (기존 Vars 범위 사용)
+    apply_common_layout(fig_land, [Vars.LAND_XMIN, Vars.LAND_XMAX], [Vars.LAND_YMIN, Vars.LAND_YMAX])
+
+    # 제주도 레이아웃 적용 (제주도 좌표에 집중)
+    apply_common_layout(fig_jeju, [Vars.JEJU_XMIN, Vars.JEJU_XMAX], [Vars.JEJU_YMIN, Vars.JEJU_YMAX])
+
+    return fig_land, fig_jeju
+
+def build_colorbar_figure():
+    v_cfg = Vars.voltage_cfg
+    
+    # 1. 절대값 가져오기 (PU든 kV든 설정된 값 그대로)
+    v_min = v_cfg["graph_min_value"]
+    v_norm = v_cfg["graph_normal_value"]
+    v_max = v_cfg["graph_max_value"]
+    
+    # 2. 범위 체크 (분모가 0이 되는 것 방지)
+    total_range = v_max - v_min
+    if total_range <= 0:
+        total_range = 1 # 에러 방지용 임시값
+
+    # 3. 가운데(Normal)의 상대적 위치 계산 (0.0 ~ 1.0 사이)
+    norm_pos = (v_norm - v_min) / total_range
+    
+    # 4. 범위를 벗어나지 않게 클램핑 (안전장치)
+    norm_pos = max(0.01, min(0.99, norm_pos))
+
+    # 5. 사용자 정의 컬러스케일 구성
+    my_colorscale = [
+        [0.0, v_cfg["graph_min_color"]],      # 양 끝 (최저)
+        [norm_pos, v_cfg["graph_normal_color"]], # 사용자가 지정한 가운데 값
+        [1.0, v_cfg["graph_max_color"]]       # 양 끝 (최고)
+    ]
+
+    fig = go.Figure(go.Heatmap(
+        z=[None, None],       # 데이터는 넣어줘야 컬러바가 생성됩니다.
+        colorscale=my_colorscale,
+        showscale=True,
+        opacity=0,                # [핵심] 배경 히트맵을 투명하게 숨깁니다.
+        hoverinfo="skip",         # 배경에 마우스 올려도 반응 없게 함
+        colorbar=dict(
+            orientation="h",
+            thickness=18,
+            len=0.9,
+            x=0.5, y=0.5,
+            xanchor="center", yanchor="middle",
+            tickvals=[v_min, v_norm, v_max],
+            tickformat=".3f",
+            tickfont=dict(color="white", size=10),
+            outlinecolor="rgba(0,0,0,0)", # 컬러바 외곽선 제거
+            ypad=0,               # 패딩 제거하여 내부 공간 극대화
+        ),
+    ))
+    
+    # 레이아웃은 이전과 동일
     fig.update_layout(
-        margin=dict(l=0, r=0, t=0, b=0),
+        margin=dict(l=5, r=5, t=5, b=5), # 여백 최소화
         xaxis=dict(visible=False),
         yaxis=dict(visible=False),
-        paper_bgcolor="#1e242b",
-        plot_bgcolor="#1e242b",
-    )
+        paper_bgcolor="#15191c", 
+        plot_bgcolor="#15191c", 
+        # [수정] 고정 height를 지우거나 vh 단위로 맞춤
+        height=None,           # 부모 Div의 높이에 맞게 자동 조절되도록 유도
+        autosize=True,         # 컨테이너 크기에 맞춤
+        width=400,             # 너비는 가급적 유지 (제목/눈금 겹침 방지)
 
+
+    )
     return fig
 
 
@@ -420,7 +550,7 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import html, dcc
 
-app = dash.Dash(__name__,  external_stylesheets=[dbc.themes.DARKLY], serve_locally=True)
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY], assets_folder=os.path.join(Vars.base_path, "assets")) # 명시적으로 지정!
 
 # --- 설정 모달 레이아웃 ---
 settings_modal = dbc.Modal([
@@ -479,39 +609,42 @@ settings_modal = dbc.Modal([
 ], id="settings-modal", is_open=False, size="lg", centered=True)
 
 
+initial_time = "대기 중"
+if Vars.df_raw is not None and not Vars.df_raw.empty:
+    try:
+        # 데이터가 있으면 그 시간으로 초기값 설정
+        initial_time = Vars.df_raw["CRTTIME"].iloc[0].strftime("%Y-%m-%d %H:%M:%S")
+    except:
+        pass
 
 app.layout = html.Div([
     # 1. 초슬림 상단 헤더 (공간 절약형)
     dbc.Row([
-        dbc.Col(html.H2("전압 분포도", className="m-0"), width="auto"),
-        dbc.Col(html.Div(className="vr mx-2", style={"height": "1.5rem"}), width="auto"),
-        dbc.Col(html.Span("NA", className="badge bg-secondary", style={"fontSize": "0.8rem"}), width="auto"),
+                dbc.Col(html.H2("전압 분포도", className="m-0"), width="auto"),
+                dbc.Col(html.Div(className="vr mx-2", style={"height": "1.5rem"}), width="auto"),
+                dbc.Col(html.Span("NA", className="badge bg-secondary", style={"fontSize": "0.8rem"}), width="auto"),
         
-        dbc.Col(width=True), # Spacer: 왼쪽 요소를 왼쪽으로 밀어줌
+                dbc.Col(width=True), # Spacer: 왼쪽 요소를 왼쪽으로 밀어줌
 
 
 
-        # 체크박스 영역
-        dbc.Col([
-            dbc.Checklist(
-                options=[{"label": "자동 갱신", "value": 1}],
-                value=[1],
-                id="auto-update-check",
-                className="custom-check",
-                inline=True,
-                style={"display": "flex", "alignItems": "center"}
-            )
-        ], width="auto", className="me-3"),
+                # 체크박스 영역
+                dbc.Col([
+                    dbc.Checklist(
+                        options=[{"label": "자동 갱신", "value": 1}], value=[1], id="auto-update-check",
+                        className="custom-check", inline=True, style={"display": "flex", "alignItems": "center"}
+                    )
+                ], width="auto", className="me-3"),
 
 
-        dbc.Col([
-            dbc.Button("설정", id="open-settings", className="custom-btn me-2"),
-        ], width="auto")
-    ], className="header-container px-3 py-2 align-items-center"),
+                dbc.Col([dbc.Button("설정", id="open-settings", className="custom-btn me-2"),], width="auto")
+            ], className="header-container px-3 py-2 align-items-center"),
 
 
     # 1초마다 스레드 상태를 체크할 타이머 (Qt의 Timer 역할)
     dcc.Interval(id="timer-checker", interval=2000, n_intervals=0),
+    # 레이아웃에 표시할 초기 시간 결정
+
 
     html.Div([
         # [수정] 수행 시각과 컬러바를 한 줄에 배치
@@ -519,8 +652,17 @@ app.layout = html.Div([
             # 왼쪽: 수행 시각 라벨
             dbc.Col([
                 html.Span("수행 시각 : ", style={"fontSize": "1.6vh", "color": "#bbb"}),
-                html.Span("2026-02-03 23:00:00", id="time-display", className="time-text"),
-                html.Span("(SCADA)", className="ms-2 opacity-50", style={"fontSize": "1.4vh"})
+                html.Span(initial_time, id="time-display", className="time-text"), 
+                html.Span("(SCADA)", className="ms-2 opacity-50", 
+                          style={"fontSize": "1.4vh",
+                                 "backgroundColor": "#15191c", 
+                                 "minHeight": "50px",   # 최소한 이 정도 높이는 유지 (모바일이나 작은 창 대비)
+                                 "height": "6vh",       # 화면 높이의 6%를 차지하도록 설정
+                                 "padding": "0 15px",
+                                 "display": "flex",
+                                 "alignItems": "center"
+                                 
+                                 })
             ], width=True, className="d-flex align-items-center"),
 
             # 오른쪽: 컬러바(범례) 영역
@@ -530,10 +672,10 @@ app.layout = html.Div([
         ], className="mb-2 align-items-center", style={"backgroundColor": "#15191c"}),
 
         # 메인 캔버스
-        html.Div(id="main-graph-canvas", className="canvas-border", style={"height": "65vh",  "backgroundColor": "#15191c"}),
+        html.Div(id="main-graph-canvas", className="canvas-border", style={"height": "70vh",  "backgroundColor": "#15191c"}),
         
         # 하단 서브 캔버스
-        html.Div(id="sub-graph-canvas", className="canvas-border mt-2", style={"height": "23vh",  "backgroundColor": "#15191c"})
+        html.Div(id="sub-graph-canvas", className="canvas-border mt-2", style={"height": "18vh",  "width":'50vw', "backgroundColor": "#15191c"})
         
     ], className="main-content m-2"),
 
@@ -542,10 +684,7 @@ app.layout = html.Div([
         id="global-loading-overlay",
         children=[
             html.Div([
-                html.Img(
-                    src="/external_assets/load_line.gif", 
-                    style={"width": "250px", "height": "auto"}
-                ),
+                html.Img(src="/assets/load_line.gif", style={"width": "250px", "height": "auto"}),
             ], className="text-center")
         ],
         style={
@@ -564,7 +703,7 @@ app.layout = html.Div([
 
     settings_modal,
     dcc.Store(id="config-store"), # 설정값을 저장할 브라우저 저장소
-
+    html.Div(id="terminator")  
 
 ])
 
@@ -601,8 +740,8 @@ def toggle_modal(n_open, n_accept, n_cancel, is_open, config):
 from dash import no_update
 
 def run_update_process(config):
-    """DB 체크 -> 로드 -> 연산 통합 프로세스"""
     global THREAD_STATE
+    print('run update process')
     # 이미 실행 중이면 중복 실행 방지
     if THREAD_STATE["is_running"] or THREAD_STATE["status"] == "running": return
 
@@ -610,60 +749,29 @@ def run_update_process(config):
     THREAD_STATE["status"] = "running"
     THREAD_STATE["is_running"] = True
 
-    thread = threading.Thread(
-        target=data_update_and_build_worker, 
-        args=(HOST, SERVICE, USER, PASSWORD, PORT, SOURCE, config)
-    )
+    thread = threading.Thread(target=data_update_and_build_worker)
     thread.daemon = True
     thread.start()
+    print('thread start')
 
-def data_update_and_build_worker(host, service, user, pwd, port, source, config):
-    global THREAD_STATE, mainland, jeju
+
+def data_update_and_build_worker():
+    global THREAD_STATE
     print("!!!! WORKER STARTED !!!!")
+
     try:
         THREAD_STATE["status"] = "running"
         THREAD_STATE["is_running"] = True
-        new_df = None
 
-        # [1] DB 시도
-        try:
-            print("[THREAD] DB 접속 시도 중...")
-            new_df, status = get_all_data_from_oracle(host, service, user, pwd, port, source)
-            
-            # DB 응답이 정상이 아닐 경우 (None, 500 에러, 데이터 비어있음 등)
-            if new_df is None or new_df.empty or status != 200:
-                print(f"[THREAD] DB 데이터 부재 (Status: {status}). CSV로 전환합니다.")
-                new_df = None # 확실히 비우고 다음 단계로
-        except Exception as e:
-            print(f"[THREAD] DB 접속 에러 발생: {e}. CSV로 전환합니다.")
-            new_df = None
+        get_all_data_from_oracle()
+        print('data updated')
 
-        # [2] DB 실패 시 CSV 로드 (강제 실행 구간)
-        if new_df is None or new_df.empty:
-            CSV_FILE = "voltmap1.csv"
-            if os.path.exists(CSV_FILE):
-                print(f"[THREAD] 로컬 CSV 로드 중: {CSV_FILE}")
-                new_df = pd.read_csv(CSV_FILE)
-            else:
-                print("[THREAD ERROR] DB도 안되고 CSV 파일도 없습니다!")
-                THREAD_STATE["status"] = "error"
-                return
-
-        # [3] 데이터 분리 및 그래프 생성
-        # (여기서부터는 new_df가 DB든 CSV든 데이터를 가지고 있는 상태입니다)
-        df_j = new_df[new_df["STNLATITUDE"] < 34.32].copy()
-        df_m = new_df[new_df["STNLATITUDE"] >= 34.32].copy()
-
-        fig_res = build_voltmap_figure(
-            df_mainland=df_m, 
-            df_jeju=df_j, 
-            config=config,
-            value_col="STNAVGVOLT"
-        )
-
+        fig_land, fig_jeju = build_voltmap_figure()
+        colorbar = build_colorbar_figure()
         # [4] 결과 저장
-        THREAD_STATE["fig"] = fig_res
+        THREAD_STATE["fig"] = (fig_land, fig_jeju, colorbar)
         THREAD_STATE["status"] = "done"
+        print('figure updated')
         print("[THREAD] 그래프 생성 완료.")
     
         print("!!!! WORKER FINISHED !!!!")
@@ -677,32 +785,48 @@ def data_update_and_build_worker(host, service, user, pwd, port, source, config)
 
 
 @app.callback(
-    [Output("main-graph-canvas", "children"),
-     Output("time-display", "children"),
-     Output("global-loading-overlay", "style", allow_duplicate=True)],
+    [
+        Output("main-graph-canvas", "children"), Output("sub-graph-canvas", "children"), Output("color-bar-legend", "children"),
+        Output("time-display", "children"), Output("global-loading-overlay", "style", allow_duplicate=True)
+    ],
     Input("timer-checker", "n_intervals"),
-    [State("auto-update-check", "value"),
-     State("time-display", "children"),
-     State("config-store", "data")],
+    [State("auto-update-check", "value"), State("time-display", "children"), State("config-store", "data")],
     prevent_initial_call='initial_duplicate'
 )
-
-
 def monitor_system(n, auto_update_val, current_display_time, config):
     global THREAD_STATE
-    
+    print(THREAD_STATE["status"])
+
+
     # [Case 1] 백그라운드 작업이 완료되었는지 확인 (Redraw)
     if THREAD_STATE["status"] == "done":
         THREAD_STATE["status"] = "idle"
-        new_fig = THREAD_STATE["fig"]
-        # 실제 데이터의 시간 혹은 현재 시간 표시
-        return [dcc.Graph(figure=new_fig, style={"height": "100%"}), 
-                datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 
-                {"display": "none"}]
+        print(f"[UI] Done state detected. Data Time: {current_display_time} -> Updating UI")
+        fig_land, fig_jeju, fig_colorbar = THREAD_STATE["fig"]
+
+        data_time = "No Data Time"
+        if Vars.df_raw is not None and not Vars.df_raw.empty:
+            # CRTTIME 컬럼의 첫 번째 값(최신값)을 가져와서 포맷팅
+            try:
+                data_time = Vars.df_raw["CRTTIME"].iloc[0].strftime("%Y-%m-%d %H:%M:%S")
+
+            except Exception as e:
+                data_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
+
+        return [
+                    dcc.Graph(figure=fig_land, style={"height": "100%", "width": "100%"}),    # main-graph-canvas
+                    dcc.Graph(figure=fig_jeju, style={"height": "100%", "width": "100%"}),    # sub-graph-canvas
+                    dcc.Graph(figure=fig_colorbar, config={'displayModeBar': False}, style={"height": "50%", "width": "100%"}),  # [확인용] 노란색 외곽선 추가
+            # color-bar-legend
+                    data_time,                                                               # time-display
+                    {"display": "none"}                                                      # 로딩바 숨김
+                ]
 
     # [Case 2] 자동 갱신이 켜져 있고, 실행 중이 아닐 때 DB 체크
     if auto_update_val and not THREAD_STATE["is_running"]:
-        latest_time = get_latest_time_from_db(HOST, SERVICE, USER, PASSWORD, PORT)
+        latest_time = get_latest_time_from_db()
         
         # 시간이 달라졌다면 (DB 업데이트 발생)
         if latest_time and str(latest_time) != str(current_display_time):
@@ -713,16 +837,33 @@ def monitor_system(n, auto_update_val, current_display_time, config):
                     "backgroundColor": "rgba(0, 0, 0, 0.8)", "display": "flex",
                     "alignItems": "center", "justifyContent": "center", "zIndex": 9999
                 }
-            return [no_update, no_update, overlay_style] # 로딩바 표시
+            return [no_update, no_update,no_update, no_update, overlay_style] # 로딩바 표시
 
-    return [no_update] * 3
+    return [no_update] * 5
 
 
 
-@app.server.route('/external_assets/<filename>')
-def serve_external_assets(filename):
-    # flask.send_from_directory를 사용하여 보안상 안전하게 파일을 전송합니다.
-    return flask.send_from_directory(COMMON_PATH, filename)
+
+# 창이 닫힐 때 서버의 /shutdown 경로로 신호를 보냄
+clientside_callback(
+    """
+    function(id) {
+        window.addEventListener('beforeunload', function (e) {
+            navigator.sendBeacon('/shutdown'); 
+        });
+        return "";
+    }
+    """,
+    Output("terminator", "children"),
+    Input("terminator", "id")
+)
+
+# 서버를 종료시키는 라우트
+@app.server.route('/shutdown', methods=['POST'])
+def shutdown():
+    print("브라우저 종료 감지: 프로세스를 종료합니다...")
+    os._exit(0) # 프로세스 자체를 즉시 파괴
+    return "Server shutting down..."
 
 
 
@@ -731,47 +872,7 @@ def serve_external_assets(filename):
 # =========================================================
 if __name__ == "__main__":
     # 1. 서버 시작과 동시에 백그라운드 연산 스레드 딱 하나만 실행
-    print("[SYSTEM] 앱 시작 - 첫 번째 데이터 로드 스레드 가동")
-
-
-    if getattr(sys, 'frozen', False):
-        base_path = os.getcwd().replace("\\", "/")
-        sysconf_path = base_path + '/../project/EMS/conf/sysconf.ini'
-        # 리소스들이 들어있는 실제 위치 (사용자 정의 기준)
-        internal_path = base_path + '/HistViewer/spxVoltMap/_internal/'
-
-        print(f"Base Path: {base_path}")
-        print(f"Internal: {internal_path}")
-
-    else:
-        # 파이썬 인터프리터로 실행 시
-        base_path = os.path.dirname(os.path.abspath(__file__))
-        sysconf_path = os.path.dirname(os.path.abspath(__file__))
-        internal_path = os.path.dirname(os.path.abspath(__file__))
-        
-
-
-    # 2. 설정 로드
-    try:
-        APP_CONFIG = load_config(internal_path)
-        print("[MAIN] Config Loaded Successfully")
-        
-        # 설정에서 DB 정보 추출 (필요시)
-        HOST = APP_CONFIG['host']
-        SERVICE = APP_CONFIG['service']
-        USER = APP_CONFIG['user']
-        PASSWORD = APP_CONFIG['password']
-        PORT = APP_CONFIG['port']
-        set_base_url(APP_CONFIG['base_url']) # Flask API URL 설정
-        
-    except Exception as e:
-        print(f"[MAIN ERROR] Config Load Failed: {e}")
-        sys.exit(1)
-
-
-
-
-    set_base_url("http://127.0.0.1:5000/")   # Flask 서버
+    load_config()
 
     run_update_process(None) 
     

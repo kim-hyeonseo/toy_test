@@ -3,8 +3,8 @@ setlocal
 
 set python64=C:\Program Files\Python39
 set python_lib_path=C:\Program Files\Python39\Lib\site-packages
-pyinstaller --windowed --onedir^
-	--collect-all spxVoltMap.py^
+pyinstaller --onedir^
+	--collect-all spxVoltMap_dash_app.py^
 	--noupx --clean ^
 	--hidden-import=fileinput ^
 	--hidden-import=numpy ^
@@ -40,20 +40,17 @@ pyinstaller --windowed --onedir^
 	--hidden-import=collections.abc ^
 	--collect-all pykrige ^
 	--collect-all scipy ^
-	--add-data "spxVoltMap.ui;." ^
-	--add-data "setting.ui;." ^
-	--add-data "load_line.gif;." ^
-	--add-data "land_outline.geojson;." ^
-	--add-data "land.geojson;." ^
-	--add-data "land_coastline.csv;." ^
-	--add-data "jeju_outline.geojson;." ^
 	--add-data "jeju.geojson;." ^
-	--add-data "jeju_coastline.csv;." ^
+	--add-data "shp.geojson;." ^
+	--add-data "optimized.geojson;." ^
+	--add-data "assets;assets" ^
 	--add-data "%python_lib_path%\numpy;.\numpy" ^
 	--add-data "%python_lib_path%\numpy\.libs;.\numpy.libs" ^
 	--add-data "%python_lib_path%\numpy\f2py;.\numpy\f2py" ^
+	--add-data "%python_lib_path%\zstandard;.\zstandard" ^
+	--add-data "%python_lib_path%\zstandard-0.21.0.dist-info;.\zstandard-0.21.0.dist-info" ^
 	--add-data "%python_lib_path%\scipy;.\scipy" ^
 	--add-data "%python_lib_path%\scipy\interpolate;.\scipy\interpolate" ^
 	--paths="%python_lib_path%\typing" ^
-spxVoltMap.py
+spxVoltMap_dash_app.py
 endlocal

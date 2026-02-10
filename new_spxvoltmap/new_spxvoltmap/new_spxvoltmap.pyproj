@@ -7,7 +7,7 @@
     <StartupFile>spxVoltMap_dash_app.py</StartupFile>
     <SearchPath>
     </SearchPath>
-    <WorkingDirectory>.</WorkingDirectory>
+    <WorkingDirectory>C:\EMS_Client_Binary\bin</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>new_spxvoltmap</Name>
     <RootNamespace>new_spxvoltmap</RootNamespace>
@@ -29,6 +29,10 @@
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|PythonCore|3.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bootstrap.min.css" />
+    <Content Include="sytle.css" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

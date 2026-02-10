@@ -1,0 +1,209 @@
+/* 기본 폰트 단위를 높이(vh) 기준으로 변경 */
+html {
+    /* 세로 해상도의 1.5%를 기준점으로 잡습니다. */
+    font-size: 1.5vh; 
+}
+
+body {
+    background-color: #1c2126; /* [cite: 174] */
+    color: white;
+    margin: 0;
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+}
+
+/* 제목: 화면을 반으로 줄여도 텍스트가 두 줄이 되지 않게 최소 크기 보정 */
+h2 {
+    font-size: 2.5rem;
+    white-space: nowrap;
+    margin-bottom: 0.5rem;
+}
+
+/* 메인 바디 영역: 고정 높이 대신 남은 세로 공간을 다 쓰도록 설정 */
+.graph-body {
+    border: 2px solid white; /* [cite: 286] */
+    border-radius: 5px;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: 75vh; /* 화면의 75%를 무조건 차지 */
+}
+
+/* 그래프 캔버스: 부모 크기에 100% 맞춤 */
+#main-graph-canvas {
+    flex-grow: 1;
+    width: 100%;
+}
+
+
+/* 1. 드롭다운 전체 기본 배경색 및 글자색 */
+.Select-menu-outer, .Select-value-label {
+    background-color: #1c2126 !important; /* Qt 배경색과 동일하게 */
+    color: white !important;
+    border-color: #555 !important;
+}
+
+/* 2. 클릭해서 목록이 열렸을 때 (옵션 리스트) 배경색 */
+.VirtualizedSelectFocusedOption {
+    background-color: #3d444b !important; /* 옵션에 마우스 올렸을 때 색상 */
+    color: white !important;
+}
+
+.VirtualizedSelectOption {
+    background-color: #1c2126 !important;
+    color: white !important;
+}
+
+/* 3. 드롭다운 화살표 및 X 버튼 색상 */
+.Select-arrow-zone, .Select-clear-zone {
+    color: #bbb !important;
+}
+
+/* 4. 입력창 내부의 배경색 강제 고정 */
+.is-focused:not(.is-opened) > .Select-control {
+    background-color: #1c2126 !important;
+    border-color: #80bdff !important;
+}
+
+
+
+/* 필터 바 전체 높이 축소 */
+.filter-bar {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    min-height: auto !important;
+}
+
+/* 드롭다운의 기본 패딩 줄이기 */
+.Select-control {
+    height: 30px !important; /* 높이 고정 */
+    font-size: 0.9rem !important;
+}
+
+.Select-placeholder, .Select-value {
+    line-height: 28px !important; /* 높이에 맞춰 텍스트 중앙 정렬 */
+}
+
+/* 라벨 폰트 크기와 간격 줄이기 */
+.filter-bar label {
+    font-size: 0.9rem;
+    white-space: nowrap; /* 글자 줄바꿈 방지 */
+    margin-bottom: 0 !important;
+}
+
+/* 버튼 크기도 콤보박스 높이에 맞춤 */
+.custom-btn {
+    height: 30px;
+    padding: 2px 12px;
+    font-size: 0.85rem;
+    line-height: 1;
+}
+
+
+/* 컬러바 컨테이너: 가로로 긴 형태의 범례를 상정 */
+.color-bar-container {
+    height: 2.5vh;
+    min-width: 250px; /* 컬러바 최소 너비 */
+    background: linear-gradient(to right, blue, green, yellow, red); /* 샘플 그라데이션 */
+    border-radius: 3px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 컬러바 내부의 수치 텍스트 (필요 시) */
+.color-bar-label {
+    font-size: 1.2vh;
+    color: white;
+    position: absolute;
+    top: 100%; /* 바 아래에 수치 표시 */
+}
+
+/* 수행시각 라벨 줄바꿈 방지 */
+.time-text {
+    white-space: nowrap;
+    font-size: 1.8vh;
+    font-weight: bold;
+    color: white;
+    font-family: 'Consolas', monospace;
+    margin-left: 8px;
+}
+
+
+
+
+/* 모달 본체 배경 및 글자색 */
+.modal-content {
+    background-color: #1c2126 !important; /* 메인 화면 배경색과 통일 */
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 모달 헤더와 푸터 라인 색상 조정 */
+.modal-header, .modal-footer {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 모달 제목 */
+.modal-title {
+    color: white !important;
+}
+
+/* 모달 내부의 입력창(Input) 테두리 및 배경 */
+.modal-body input {
+    background-color: #2b3035 !important;
+    color: white !important;
+    border: 1px solid #444 !important;
+}
+
+/* 드롭다운 메뉴 (DPI 선택 등) 배경 어둡게 */
+.Select-control, .Select-menu-outer {
+    background-color: #2b3035 !important;
+    color: white !important;
+}
+
+/* InputGroup 내부 라벨과 입력창의 비율을 강제로 고정 */
+.setting-label {
+    display: flex !important;
+    width: 100%;
+}
+
+/* 왼쪽 라벨 부분: 전체의 30%를 차지하게 설정 */
+.setting-label .input-group-text {
+    flex: 0 0 30% !important; /* 고정 비율 30% */
+    justify-content: center; /* 글자 중앙 정렬 */
+    white-space: nowrap; /* 줄바꿈 방지 */
+    overflow: hidden; /* 넘침 방지 */
+    text-overflow: ellipsis; /* 글자가 너무 길면 ... 표시 (안전장치) */
+}
+
+/* 오른쪽 입력창 부분: 나머지 70%를 차지 */
+.setting-label .form-control {
+    flex: 1 1 70% !important;
+    min-width: 0; /* Flex 내부에서 찌그러짐 방지 */
+}
+
+
+/* 개별 항목 컨테이너: 라벨 왼쪽, 입력창 오른쪽 */
+.setting-item-row {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+/* 컬러 피커 폭을 일정하게 (부모의 40% 정도) */
+.fixed-color-picker {
+    flex: 0 0 40% !important;
+    height: 1.8rem;
+    border: 1px solid #ffffff;
+    cursor: pointer;
+    background: none;
+    padding: 0;
+}
+
+/* 숫자 입력창 폭 조정 */
+.fixed-input-resol {
+    flex: 0 0 50% !important;
+}
